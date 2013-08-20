@@ -1,13 +1,46 @@
-\documentclass{article}
-\title{IncoStudy}
-\author{Autor}
+\RequirePackage{lineno}
+\documentclass[9pt,draft]{article}
+\usepackage{graphicx,ucs,multicol,natbib}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[romanian]{babel}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage[printonlyused,withpage]{acronym}
+
+\bibpunct{(}{)}{;}{a}{,}{,}
+ 
+\title{Studiu observațional asupra tratamentului incontinenței urinare de efort la pacientele din ambulator}
+\author{Dr.~Andrei~Manu-Marin,~medic~primar~urologie\\Gnosis-EvoMed, str.~Suvenir,~nr.~10,~sect.~2,~București}
 \date{}
-  
-  \begin{document}
+
+
+\begin{document}
+
+  \setlength{\columnsep}{25pt}
   \maketitle
-  \tableofcontents
+  \linenumbers
   
-  \section{Sectiunea 1}
-	  Text
+  \begin{abstract}
+	\ac{IU} este definită ca orice pierdere involuntară a urinei. \ac{IU} face parte din categoria de simptome ale tractului urinar inferior (prescurtare: \ac{LUTS}) care includ dificultăți atât legate de stocarea urinei cât și de eliminarea ei, \ac{IU} fiind in categoria simptome de stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma anamnezei și a contextului simptomelor descrise de pacient.  
+  \end{abstract}
   
-  \end{document}
+  \begin{multicols}{2}
+  \section{Introducere}
+	\ac{IU} este definită ca orice pierdere involuntară a urinei. \ac{IU} face parte din categoria de simptome ale tractului urinar inferior (prescurtat, \ac{LUTS}) care includ dificultăți atât legate de stocarea urinei cât și de eliminarea ei, \ac{IU} fiind in categoria simptome de stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma anamnezei și a contextului simptomelor descrise de pacient.  
+
+	\ac{IUI} se definește ca pierderea de urină precedată de senzatia intensă de a urina, numită imperiozitate. \ac{IUE} se definește ca eliminarea involuntară de urină asociată cu anumite activități fizice (de ex. strănut și tuse). \ac{IUM} include caracteristici atât ale \ac{IUI} cât și ale \ac{IUE}. Vezi \citep{ihaka1996,venables1999}
+  \end{multicols}
+  
+  \bibliographystyle{plainnat}
+  \bibliography{incoStudy}
+  
+  \section*{Glosar}
+  \begin{acronym}[LUTS]
+    \acro{IU}{Incontinența Urinară}
+    \acro{IUI}{Incontinența Urinară prin Imperiozitate}
+    \acro{IUE}{Incontinența Urinară de Efort}
+    \acro{IUM}{Incontinența Urinară Mixtă}
+    \acro{LUTS}{Lower Urinary Tract Symptoms}
+  \end{acronym}
+
+\end{document}

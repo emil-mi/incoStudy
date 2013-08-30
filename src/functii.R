@@ -1,0 +1,15 @@
+library(lattice)
+library(grid)
+library(xtable)
+library(rstan)
+library(ggplot2)
+library(latticeExtra)
+library(coin)
+library(boot)
+library(bootstrap)
+library(MASS)
+library(KernSmooth)
+library(ks)
+library(reshape2)
+
+graph.bg<-"white"

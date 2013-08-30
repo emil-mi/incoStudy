@@ -4,3 +4,7 @@
 
 /doc/*.tdo
 /doc/incoStudy.bbl
+
+/doc/*.lot
+
+/doc/*.lof

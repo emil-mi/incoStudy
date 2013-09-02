@@ -15,8 +15,6 @@
 
 #expand.grid face produs cartezian NxMxW, outer - produs v*u^t, inner- produs scalar u*v
 
-source('src/functii.R')
-
 rm(list=intersect(c('TOT','AMB','IU','COMMON','IU_WIDE'),ls()))
 
 psiValues<-c(
@@ -101,40 +99,3 @@ print(dp2,split = c(1, 2, 1, 2),newpage=FALSE)
 dev.off()
 
 }
-
-# print("Varsta")
-# print(by(COMMON$Varsta,COMMON$Tip,summary))
-# 
-# #Investigatii menopauza
-# frame()
-# par(ask=FALSE)
-# print("Menopauza")
-# print(by(COMMON$Menopauza,COMMON$Tip,sum))
-# plot(xyplot(Menopauza~Varsta|Tip,data=COMMON),more=TRUE)
-# plot(xyplot(pnorm(Varsta,mean=51,sd=5)~Varsta|Tip,data=COMMON[order(COMMON$Varsta),],type='l',ylab=' '))
-# par(ask=TRUE)
-# 
-# #Investigatii BMI
-# print("BMI")
-# print(by(COMMON$BMI,COMMON$Tip,summary))
-# plot(histogram(~BMI|Tip,data=COMMON,nint=6), split=c(1,1,2,1))
-# par(mfrow = c(1,2),new=TRUE)
-# boxplot(BMI~Tip,data=COMMON)
-# 
-# #Investigatii nasteri
-# frame()
-# par(ask=FALSE)
-# print("Nasteri")
-# print(by(COMMON$Nasteri,COMMON$Tip,summary))
-# plot(histogram(~Nasteri|Tip,data=COMMON,nint=3,main="Nasteri"), split=c(1,1,2,1),more=TRUE)
-# plot(stripplot(Nasteri~Tip,data=COMMON),split=c(2,1,2,1))
-# par(ask=TRUE)
-
-#Investigatii patologii
-#frame()
-#par(ask=FALSE)
-#print("Patologii")
-#plot(histogram(Bronsita_cronica+Diabet+Psi~Varsta|Tip,data=COMMON,type='count'))
-#par(ask=TRUE)
-
-#fhat<-kde(Varsta.M,hpi(Varsta.M))

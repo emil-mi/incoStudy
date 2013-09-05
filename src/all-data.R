@@ -55,16 +55,6 @@ VarstaRO2010 <- data.frame(
   Rural=VarstaRO2010.insse$RuralBoth
   )
 
-IU_WIDE<-reshape(IU,idvar=1:10,direction="long",varying=11:24,new.row.names=1:10000,timevar="TRT")
-
-#verificari
-stopifnot(
-  all(IU_WIDE[1:50,1:10] %in% IU[,1:10]),
-  all(IU_WIDE[51:100,1:10] %in% IU[,1:10]),
-  all(IU_WIDE[1:50,12:18] %in% IU[,11:17]),
-  all(IU_WIDE[51:100,12:18] %in% IU[,18:24])
-)
-
 #tempCleanup
 suppressWarnings( rm(extColumnClasses,columnClasses,psiValues,VarstaRO2010.insse) )
 

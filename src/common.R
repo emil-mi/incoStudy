@@ -11,6 +11,7 @@ library(MASS)
 library(KernSmooth)
 library(ks)
 library(reshape2)
+library(plyr)
 
 graph.bg<-"white"
 

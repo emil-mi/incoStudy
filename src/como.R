@@ -2,6 +2,7 @@ rm(list=ls())
 source('src/common.R')
 source('src/all-data.R')
 
+#colecteaza co-morbiditatile din coloanele Diabet, Bronsita_cronica, PSI intr-o singura coloana
 t<-apply(IU,1,function(row){
   Filter(Negate(is.na),
     with(as.list( row ),
@@ -16,8 +17,11 @@ t<-apply(IU,1,function(row){
 names(t)<-NULL
 t<-lapply(t,function(l) ifelse(length(l)==0,NA,l[[1]]))
 t<-lapply(t,function(l) factor(l,unique(unlist(t))))
+
 summary(IU$com)
 IU$com<-t(data.frame(t))
+rm(t)
+
 by(IU,IU$com,nrow)
 
 local({

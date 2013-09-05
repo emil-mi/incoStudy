@@ -4,7 +4,7 @@ incoStudy
 Studiu clinic in R
 ------------------
 
-Documentul PDF se gaseste in [incoStudy.pdf](doc\incoStudy.pdf).
+Documentul PDF se gaseste in [incoStudy.pdf](doc/incoStudy.pdf).
 
 Cerintele initiale au fost:
 

@@ -22,16 +22,16 @@ IU_WIDE$Variable<-as.factor(IU_WIDE$Variable)
 IU.I2D<-subset(IU_WIDE,Variable=='I2D')
 rownames(IU.I2D)<-1:nrow(IU.I2D)
 
-likertScale.4<-c("Deloc","UÈ™or","Moderat","Mult")
-likertScale.7<-c("ÃŽncÃ¢ntat","MulÈ›umit","Oarecum satisfÄƒcut",
-                 "Indiferent","NesatisfÄƒcut","Nefericit","Groaznic")
+likertScale.4<-c("Deloc","U?or","Moderat","Mult")
+likertScale.7<-c("Încântat","Mul?umit","Oarecum satisfãcut",
+                 "Indiferent","Nesatisfãcut","Nefericit","Groaznic")
 likertScale.7b<-c("Mult mai bine",
                   "Mai bine",
                   "Ceva mai bine",
                   "Nici o schimbare",
-                  "Ceva mai rÄƒu",
-                  "Mai rÄƒu",
-                  "Mult mai rÄƒu") 
+                  "Ceva mai rãu",
+                  "Mai rãu",
+                  "Mult mai rãu") 
 
 IU.CEII <- subset(IU_WIDE,subset=Variable=='CEII')
 IU.CEII <- within(IU.CEII,value <- round(value/7))
@@ -52,7 +52,7 @@ IU.VAS.LIKERT<-dcast(IU.VAS.LIKERT,Trt~Level,value.var='Freq')
 rm(levelsMap)
 
 IU.FEFMP <- subset(IU_WIDE,subset=Variable=='FEFMP')
-IU.FEFMP.LIKERT <-as.data.frame(xtabs( ~ factor( value,1:5,c('Nimic','Sesizabil','Mediu','SatisfÄƒcÄƒtor','Puternic') )+Trt,IU.FEFMP))
+IU.FEFMP.LIKERT <-as.data.frame(xtabs( ~ factor( value,1:5,c('Nimic','Sesizabil','Mediu','Satisfãcãtor','Puternic') )+Trt,IU.FEFMP))
 colnames(IU.FEFMP.LIKERT)[1]<-"Level"
 IU.FEFMP.LIKERT<-dcast(IU.FEFMP.LIKERT,Trt~Level,value.var='Freq')
 
@@ -137,7 +137,7 @@ local({
     histogram(~value|Trt,IU.USS,nint=7,type="percent",
               col=rev(likertColorBrewer(8,BrewerPaletteName='RdYlGn')),
               main="USS")
-    ,ylab="Procent",xlab="NumÄƒrul de vizite"
+    ,ylab="Procent",xlab="Numãrul de vizite"
   )
   png(filename="doc/img/incoResUSS.png",width=540,height=540,bg=graph.bg)
   print(g.res.uss_trt.hist)

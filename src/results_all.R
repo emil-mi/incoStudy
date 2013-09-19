@@ -1,4 +1,4 @@
-rm(list=ls())
+rm(list=ls(all.names=T))
 source('src/common.R')
 source('src/all-data.R')
 
@@ -188,9 +188,50 @@ print(
   table.placement="H"
 )
 
+local({
+  fishers<-t(sapply( as.character(unique(IU_WIDE$Variable)),
+                     function(variable) {
+                       with(subset(IU_WIDE,Variable==variable),
+                            by(list(value,group),Trt,function(x) {
+                              colnames(x)<-c('value','group')
+                              test<-try(fisher.test(table(x$value,x$group),conf.int=F),silent=T)
+                              test<-try(chisq.test(table(x$value,x$group),simulate.p.value=T),silent=T)
+                              if (class(test)!='htest') return( c(p.value=NA) )
+                              c(p.value=test$p.value)
+                            })
+                       )
+                     }
+  ))
+  colnames(fishers)<-c("$p$ PRE","$p$ POST")
+  print(
+    xtable(fishers[-1,],digits=5,
+           align="|l|c|c|",
+           "Rezultatele testelor Fisher pentru asocierea dintre valoarea inregistrata si grup",
+           "tab:resFisherGroup"),
+    hline.after=-1:6,
+    table.placement="H",
+    sanitize.text.function=identity
+    )
+})
+
+local({
+  styleGraph(stripplot(
+    value~Trt|Variable,
+    IU_WIDE,
+    type=c('p','r'),
+    auto.key=T,jitter.data=T,alpha=0.6,
+    groups=group,
+    subset=Variable %in% c('CVDSU','VAS','FEFMP')),
+             scales = list( y = list(axs = "r",alternating = 2) ))
+    
+    densityplot(~value|Trt,IU.CVDSU,groups=group,auto.key=T,panel=panel.superpose)
+})
 if (F) {
 
-histogram(~value|Trt+Variable,IU_WIDE,type='density',scales=list(x="free"),
+  summary(lm(value~Trt,IU.CVDSU,subset=group=='IUE'))
+  summary(lm(value~Trt,IU.CVDSU,subset=group=='IUI'))
+  
+  histogram(~value|Trt+Variable,IU_WIDE,type='density',scales=list(x="free"),
           panel=function(x,...){
             panel.histogram(x,...)
             panel.densityplot(x,plot.points=F,...)
@@ -202,9 +243,9 @@ glms<-lapply( as.character(setdiff(unique(IU_WIDE$Variable),'IGPI')),
                 glmFit<-function(x) {
                   
                   ret<-glm(
-                    value~Trt+Nasteri+Varsta,poisson,
+                    value~Trt+group,poisson,
                     IU_WIDE,subset=Variable==x)
-                  ret<-lm(value~group,IU_WIDE,subset=Variable==x & Trt=='POST')
+                  #ret<-lm(value~group,IU_WIDE,subset=Variable==x & Trt=='POST')
                   ret$call<-match.call()
                   ret
                 }
@@ -259,4 +300,27 @@ anova(
   glm(value~Trt+group,poisson,IU_WIDE,subset=Variable=='I2D'))
 
 summary(glms[[1]])
-}
+
+histogram(~value|group+Trt,IU.CEII,nint=4)
+with( IU.CEII,
+    by(list(value,group),Trt,FUN=function(x) {
+      colnames(x)<-c('value','group')
+      fisher.test(table(x$value,x$group),conf.int=F)
+      })
+)
+
+histogram(~value|group+Trt,IU.CVDSU,nint=7)
+with( IU.CVDSU,
+      by(list(value,group),Trt,FUN=function(x) {
+        colnames(x)<-c('value','group')
+        fisher.test(table(x$value,x$group))
+      })
+)
+
+histogram(~value|group+Trt,IU.VAS,nint=7)
+with( IU.VAS,
+      by(list(value,group),Trt,FUN=function(x) {
+        colnames(x)<-c('value','group')
+        fisher.test(table(x$value,x$group))
+      })
+)

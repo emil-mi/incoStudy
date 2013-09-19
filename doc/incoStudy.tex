@@ -1,7 +1,8 @@
 \RequirePackage{lineno}
 \documentclass[12pt,draft]{article}
 \usepackage[final]{graphicx}
-\usepackage{ucs,multicol,natbib,ifdraft,mathtools,xfrac,float,hyperref,array}
+\usepackage{ucs,multicol,natbib,ifdraft,mathtools,xfrac,float,array}
+\usepackage[hidelinks]{hyperref}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[romanian]{babel}
@@ -117,13 +118,19 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
   Dacă scorul este mai mare decât un prag convențional ales $0.05$ atunci ipoteza $H_0$ de egalitate a primului moment este rejectata. 
   Pentru detalii vezi \citep{wilcoxon45,siegel56}.
 
+\subsubsection{Testul Fisher}
+ \label{testFisher}
+ \textbf{Testul Fisher} este un test exact in sensul ca poate calcula exact deviatia de la ipoteza nula pentru ca ia in calcul toate posibilitatile de combinare a factorilor, care se foloseste pentru tabelele de contingenta ale datelor categoriale in cazul in care numarul de categorii este mic (pentru multe categorii calculul este complicat pentru ca apar probleme numerice legate de lucru cu valori foarte mari generate de distributia hypergeometrica si functia $\Gamma$). Statistica folosita este $p = \frac{ \displaystyle{{a+b}\choose{a}} \displaystyle{{c+d}\choose{c}} }{ \displaystyle{{n}\choose{a+c}} } = \frac{(a+b)!~(c+d)!~(a+c)!~(b+d)!}{a!~~b!~~c!~~d!~~n!}$ care reprezinta probabilitatea de a obtine un tabel de contingenta cu valorile $a, b, c, d, n=a+b+c+d$ din setul tuturor tabelelor posibile. Alternativa testului Fisher este testul $\chi^2$ (chi pătrat). Pentru detalii vezi \citep{fisher1922interpretation}.
+
 \subsubsection{Testul Kolmogorov–Smirnov}
+ \label{testKS}
  \textbf{Testul Kolmogorov–Smirnov} este un test non-parametric pentru ipoteza statistică de proveniență din aceeași distribuție continuă și unidimensională pentru doua eșantioane care se folosește atunci când distribuția nu este normală (teste mai puternice pentru a determina normalitatea datelor sunt  Shapiro–Wilk sau Anderson–Darling \citep{Stephens74} ). 
  Plecând de la distribuția empirică descrisa de funcția $F_n(x)={1 \over n}\sum_{i=1}^n I_{X_i\leq x}$ unde $X_i$ sunt variabile independente și identic distribuite iar $I_{X_i\leq x}$ este funcția indicator egala cu $1$ dacă $X_i\leq x$ și cu $0$ în rest, se calculează statistica Kolmogorov–Smirnov $D_{n,n'}=\sup_x |F_{1,n}(x)-F_{2,n'}(x)|$ pentru o fiecare distribuție empirică $F_{i,n}(x)$ data. 
  Teorema lui Kolmogorov arata că ipoteza nula este rejectata cu o probabilitate p dacă $D_{n,n'}\sqrt{\frac{n n'}{n + n'}}>K_\alpha$ unde $K_\alpha$ este obținut din $Pr(K\leq K_\alpha)=1-\alpha$ cu $Pr(K\leq x)$ fiind distribuția cumulativa de probabilitate data de $Pr(K\leq x)=1-2\sum_{k=1}^\infty (-1)^{k-1} e^{-2k^2 x^2}=\frac{\sqrt{2\pi}}{x}\sum_{k=1}^\infty e^{-(2k-1)^2\pi^2/(8x^2)}$. 
  Pentru detalii vezi \citep{stuart99}.
 
 \subsubsection{Testul Student t}
+ \label{testT}
  \textbf{Testul Student t} sau \textbf{testul t} este un test parametric pentru ipoteza statistică nula de egalitate a mediei intre 2 eșantioane ($X_1,X_2$) sau intre media unui eșantion și o valoare specificata. Statistica testata este $t = \frac{\bar {X}_1 - \bar{X}_2}{S_{X_1X_2} \cdot \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$ cu $ S_{X_1X_2} = \sqrt{\frac{(n_1-1)S_{X_1}^2+(n_2-1)S_{X_2}^2}{n_1+n_2-2}}.$ și $S_{X_1},S_{X_1}$ sunt deviațiile standard iar $\bar {X}_1,\bar{X}_2$ sunt mediile ale eșantioanelor $X_1,X_2$.
  Eșantioanele trebuie sa îndeplinească următoarele condiții:
  \begin{itemize}
@@ -142,6 +149,7 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
 %%%%    
 \Section{Rezultate}
 \subsection{Populația}
+ \label{rezPop}
   Un număr de 50 de pacienți au fost observați. Dintre aceștia 62\% (N=31) sunt de sex feminin iar 38\% (N=19) sunt de sex masculin (proporția sexelor în grupa populației urbane cu vârste cuprinse intre 27 și 83 ani la nivel național conform \citep{insee2011} este de 47\% M și 53\% F). 25 dintre aceștia suferă de \ac{IUE} și 25 de \ac{IUI}.
   Vârsta pacienților de sex feminin este distribuita normal în jurul mediei de 50 de ani și 7 luni ($\sigma=14.3,min=27,max=77$) iar cea a pacienților de sex masculin este o combinație de distribuții normale centrate în jurul mediilor de 46 respectiv 75 ani ($\sigma_{1}=12.3 , \sigma_{2}=9.2,min=30,max=83$).
   Pentru a evalua reprezentativitatea eșantionului relativ la distribuția vârstelor în cadrul populației din Romania am apelat la datele oficiale din \citep{insee2011} care detaliază numărul de cetățeni romani pe sexe și categorie urban/rural pentru fiecare vârstă la data de 1 iulie 2010. 
@@ -266,7 +274,7 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
        & $Pr(>|t|)$ & 95 \% CI \\   \hline
       I2D & 		$1.8e-22$ 	& $[ 6.50, 8.22 ]$ \\ \hline
       CEII & 		$4.4e-32$ 	& $[ 10.83, 12.49 ]$ \\ \hline
-      CVDSU & $8e-30$ 		& $[ 3.96, 4.64 ]$ \\ \hline
+      CVDSU & $8.0e-30$ 	& $[ 3.96, 4.64 ]$ \\ \hline
       VAS & 		$1.8e-24$ 	& $[ 5.50, 6.78 ]$ \\ \hline
       USS & 		$7.2e-11$ 	& $[ 1.27, 2.09 ]$ \\ \hline
       FEFMP & $2.1e-25$ 	& $[ -2.31, -1.89 ]$ \\ \hline
@@ -330,8 +338,27 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
     \label{fig:incoResIGPI}
   \end{figure}
   %
-  
- \Section{Concluzii}
+\subsubsection{Analiza influentei tipului de incontinenta}
+ Dupa cum a fost mentionat in sectiunea~\nameref{rezPop}, la studiu au participat un numar egal ($n_1=n_2=25$) de pacienti care sufera de \ac{IUE} si de \ac{IUI}. Intre aceste 2 grupuri exista diferente atat in parametrii populatiei (varsta, sex, etc.) precum si in rezultatele dupa aplicarea tratamentului. Grupul pacientilor care sufera de \ac{IUE} este compus exclusiv de paciente de sex feminin cu varste cuprinse intre 28 si 77 de ani, iar grupul care sufera de \ac{IUI} este compus preponderent din barbati (76\%, n=19) cu varste cuprinse intre 30 si 83 ani iar femeile (24\%, n=6) au varstele intre 27 si 77 ani. Dupa cum am aratat anterior (vezi figura~\ref{fig:incoComoCntBySex}), barbatii au de asemenea cel mai mare numar de probleme medicale.
+Efectele tratamentului inregistrate prin chestionare sunt influentate de tipul de incontinenta care se dovedeste a avea un efect semnificativ statistic ($p<0.05$) doar in 2 cazuri: \ac{CVDSU} si \ac{VAS} inainte de tratament si un efect nesemnificativ in \ac{FEFMP} dupa tratament. Valorile $p$ pentru corelarea dintre toate datele colectate pe scale Likert si grup, inainte si dupa tratament se gasesc in tabela~\ref{tab:resFisherGroup}. In urma unei regresii lineare
+ %
+ \begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|c|} \hline
+	   																	& $p$ PRE 													& $p$ POST \\ \hline
+		CEII 														& 0.23151 													& 0.53621 \\ \hline
+		\textcolor{green}{CVDSU} 	& \textcolor{green}{0.03888} 	& 0.60262 \\ \hline
+		\textcolor{green}{VAS} 			& \textcolor{green}{0.04250} 	& 0.11972 \\ \hline
+		IGPI 														& NA 																&  0.33212 \\ \hline
+		USS 															& 0.28003 													& 0.30178 \\ \hline
+		\textcolor{yellow}{FEFMP} 	& 0.15156 													& \textcolor{yellow}{0.08047} \\ \hline
+	\end{tabular}
+	\caption{Rezultatele testelor Fisher pentru asocierea dintre valoarea inregistrata si grup} 
+	\label{tab:resFisherGroup}
+\end{table}
+
+ %%%% 
+\Section{Concluzii}
   
    
   \closeopenmulticols

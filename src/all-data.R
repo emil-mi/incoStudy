@@ -71,10 +71,21 @@ asTheEconomist(densityplot(~Varsta,data=IU,groups=Tip,auto.key=T,plot.points=F,m
                              }))
 
 dp1<-asTheEconomist(
-  densityplot(~Varsta,data=IU,groups=Tip,auto.key=T,plot.points=F,main='',ylab=''),
+  densityplot(
+    ~Varsta,
+    data=IU,
+    groups=Tip,
+    auto.key=T,
+    plot.points=F,main='',ylab=''),
   xlab='Varsta'
   )
-dp2<-bwplot(Varsta~Tip,data=IU,ylab='Varsta',xlab='Sex',par.settings=theEconomist.theme())
+
+dp2<-asTheEconomist( bwplot(
+  Varsta~Tip,
+  data=IU,
+  ylab='Vârsta',
+  xlab='Sex')
+)
 
 #sterg etichetele de la scala y. Nu am gasit un alt mod pana acum
 dp1$yscale.components.old<-dp1$yscale.components

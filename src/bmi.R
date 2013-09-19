@@ -199,11 +199,14 @@ local({
             },
             panel=function(x,breaks,...){
               panel.grid(v=-10,h=0)
-              panel.rect(25,-1,30,max(x),col="yellow",alpha=.3)
-              panel.rect(30,-1,max(breaks)+1,max(x),col="red",alpha=.5)
+              colOVR<-likertColorBrewer(8,BrewerPaletteName='RdYlGn')[1]
+              colOBE<-likertColorBrewer(8,BrewerPaletteName='RdYlGn')[3]
+              panel.rect(25,-1,30,max(x),col=colOBE,alpha=.3)
+              panel.rect(30,-1,max(breaks)+1,max(x),col=colOVR,alpha=.5)
               panel.histogram(x,breaks,...)
               panel.densityplot(x,plot.points=F,col='blue',alpha=0.5)
-            }
+            },
+            col="#5F92A8"
   )
   png(filename="doc/img/incobmiDens.png",width=540,height=540,bg=graph.bg)
   print(g.EIU.bmiDens)

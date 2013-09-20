@@ -22,6 +22,7 @@ suppressPackageStartupMessages({
   library(languageR)
   library(pbkrtest)
   library(plm)
+  library(Hmisc)
 })
 
 graph.bg<-"white"

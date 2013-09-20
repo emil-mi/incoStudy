@@ -212,20 +212,58 @@ local({
     table.placement="H",
     sanitize.text.function=identity
     )
+  
+  s.CVDSU.IUI<-summary(lm(value~Trt,IU.CVDSU,subset=group=='IUI'))
+  s.CVDSU.IUE<-summary(lm(value~Trt,IU.CVDSU,subset=group=='IUE'))
+
+  s.FEFMP.IUI <-summary(lm(value~Trt,IU.FEFMP,subset=group=='IUI'))
+  s.FEFMP.IUE <-summary(lm(value~Trt,IU.FEFMP,subset=group=='IUE'))
+  
+  cat(do.call(sprintf,
+              c("\\beta=%.2f, t(%d)=%.3f, p<%.3f",
+                with(s.CVDSU.IUI,list(coefficients[2],df[2],sigma,coefficients[2,4])))))
+  cat(do.call(sprintf,
+          c("\\beta=%.2f, t(%d)=%.3f, p<%.3f",
+               with(s.CVDSU.IUE,list(coefficients[2],df[2],sigma,coefficients[2,4])))))
+
+  cat(do.call(sprintf,
+              c("\\beta=%.2f, t(%d)=%.3f, p<%.3f",
+                with(s.FEFMP.IUI,list(coefficients[2],df[2],sigma,coefficients[2,4])))))
+  cat(do.call(sprintf,
+              c("\\beta=%.2f, t(%d)=%.3f, p<%.3f",
+                with(s.FEFMP.IUE,list(coefficients[2],df[2],sigma,coefficients[2,4])))))
+  
 })
 
 local({
-  styleGraph(stripplot(
+  g.res.regVasCvdsu_grp.strips<-styleGraph(stripplot(
     value~Trt|Variable,
     IU_WIDE,
     type=c('p','r'),
     auto.key=T,jitter.data=T,alpha=0.6,
     groups=group,
-    subset=Variable %in% c('CVDSU','VAS','FEFMP')),
-             scales = list( y = list(axs = "r",alternating = 2) ))
-    
-    densityplot(~value|Trt,IU.CVDSU,groups=group,auto.key=T,panel=panel.superpose)
+    subset=Variable %in% c('CVDSU','VAS')),
+             scales = list( y = list(axs = "r",alternating = 2) ))    
+
+  g.res.regFEFMP.strips<-styleGraph(stripplot(
+      value~Trt|Variable,
+      IU.FEFMP,
+      type=c('p','r'),
+      auto.key=T,jitter.data=T,alpha=0.6,
+      groups=group,
+      ),
+    scales = list( y = list(axs = "r",alternating = 2) ))    
+  
+  png(filename="doc/img/incoResRegGrp.png",width=540,height=540,bg=graph.bg)
+  print(g.res.regVasCvdsu_grp.strips)
+  dev.off()
+  
+  png(filename="doc/img/incoResRegFEFMP.png",width=540,height=540,bg=graph.bg)
+  print(g.res.regFEFMP.strips)
+  dev.off()
+  
 })
+
 if (F) {
 
   summary(lm(value~Trt,IU.CVDSU,subset=group=='IUE'))
@@ -245,7 +283,7 @@ glms<-lapply( as.character(setdiff(unique(IU_WIDE$Variable),'IGPI')),
                   ret<-glm(
                     value~Trt+group,poisson,
                     IU_WIDE,subset=Variable==x)
-                  #ret<-lm(value~group,IU_WIDE,subset=Variable==x & Trt=='POST')
+                  ret<-lm(value~group,IU_WIDE,subset=Variable==x & Trt=='POST')
                   ret$call<-match.call()
                   ret
                 }
@@ -254,6 +292,9 @@ glms<-lapply( as.character(setdiff(unique(IU_WIDE$Variable),'IGPI')),
 )
 lapply(glms,summary)
 
+summary(lm(value~Trt,IU.CVDSU,subset=group=='IUE'))
+summary(lm(value~Trt,IU.CVDSU,subset=group=='IUI'))
+  
 IU.FEFMP$Id<-seq(1,nrow(IU.FEFMP)/2)
 IU.FEFMP$BMIc<-findInterval(IU.FEFMP$BMI,co.intervals(IU.FEFMP$BMI,overlap=0)[,1])
 IU.FEFMP$Varstac<-findInterval(IU.FEFMP$Varsta,co.intervals(IU.FEFMP$Varsta,overlap=0)[,1])
@@ -324,3 +365,42 @@ with( IU.VAS,
         fisher.test(table(x$value,x$group))
       })
 )
+
+if (F) {
+  #cat la suta din intervalele de incredere de 99% contin media?
+  #in jur de 99% :)
+  data<-rnorm(1000)
+  ints.100<-sapply(seq(1,3000,50),function (num) {
+    ints<-sapply(seq_len(num),function (x) {
+      sdata<-sample(data,100,F)
+      test<-t.test(sdata,conf.level=.95)
+      !(test$conf.int[1]<=0 & test$conf.int[2]>=0)
+    })
+    sum(ints)
+  })
+  head(ints.100)
+  ints.101<-ints.100/(seq_along(ints.100)*50)
+  xyplot(y~x*50,data.frame(x=seq_along(ints.101),y=ints.101),type=c('l','smooth'))
+  histogram(~y,data.frame(x=seq_along(ints.101),y=ints.101))
+  summary(1-ints.101)
+
+  ints<-as.data.frame(t(sapply(1:100,function (x) {
+    sdata<-sample(data,100,T)
+    test<-t.test(sdata,conf.level=.95)
+    list(V1=test$conf.int[1],V2=test$conf.int[2])
+  })))
+  ints$V4<-seq_len(length(ints$V1))
+  head(ints)
+  
+  segplot(V4~V1+V2,ints,apanel=function(x,y,z,...){  
+    panel.segplot(x,y,z,
+                  asegments.fun=function(...) {
+                    par<-list(...)
+                    par$col<-rep("red",length(par[[1]]))
+                    par$col[par[[1]]<=0 & par[[3]]>=0]<-"green"
+                    do.call(panel.segments,par)
+                  })
+    panel.abline(v=0)
+  })
+
+}

@@ -1,5 +1,5 @@
 \RequirePackage{lineno}
-\documentclass[12pt,draft]{article}
+\documentclass[12pt]{article}
 \usepackage[final]{graphicx}
 \usepackage{ucs,multicol,natbib,ifdraft,mathtools,xfrac,float,array}
 \usepackage[hidelinks]{hyperref}
@@ -46,12 +46,12 @@
 
 \begin{document}
 
-\ifdraft{}{\fontsize{6mm}{9mm}\selectfont}
+%\ifdraft{}{\fontsize{6mm}{9mm}\selectfont}
+
 \maketitle\ifdraft{\linenumbers}{ }\todototoc\listoftodos
 
 \begin{abstract}
-\ac{IU} este definită ca orice pierdere involuntară a urinei. \ac{IU} face parte din categoria de simptome ale tractului urinar inferior (prescurtare: \ac{LUTS}) care includ dificultăți atât legate de stocarea urinei cât și de eliminarea ei, \ac{IU} fiind în categoria simptome de
-stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma anamnezei și a contextului simptomelor descrise de pacient. \todo{Mai multe detalii despre studiu}
+\ac{IU} este definită ca orice pierdere involuntară a urinei. \ac{IU} face parte din categoria de simptome ale tractului urinar inferior (prescurtare: \ac{LUTS}) care includ dificultăți atât legate de stocarea urinei cât și de eliminarea ei, \ac{IU} fiind în categoria simptome de stocare. Tratamentul aplicat acestor pacienți îmbunătățește semnificativ toate valorile urmărite, atât pe cele subiective cât și pe cele obiective, reduce cu 87\% ($\approx2\sigma$) numărul de episoade de incontinență și mărește cu 50\% ($\approx2\sigma$) forța musculaturii perineale. Aceste efecte sunt robuste indiferent dacă pacienții suferă de \acf{IUE} sau \acf{IUI}.
 \end{abstract}
   
 \Section{Introducere}
@@ -120,7 +120,7 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
 
 \subsubsection{Testul Fisher}
  \label{testFisher}
- \textbf{Testul Fisher} este un test exact in sensul ca poate calcula exact deviatia de la ipoteza nula pentru ca ia in calcul toate posibilitatile de combinare a factorilor, care se foloseste pentru tabelele de contingenta ale datelor categoriale in cazul in care numarul de categorii este mic (pentru multe categorii calculul este complicat pentru ca apar probleme numerice legate de lucru cu valori foarte mari generate de distributia hypergeometrica si functia $\Gamma$). Statistica folosita este $p = \frac{ \displaystyle{{a+b}\choose{a}} \displaystyle{{c+d}\choose{c}} }{ \displaystyle{{n}\choose{a+c}} } = \frac{(a+b)!~(c+d)!~(a+c)!~(b+d)!}{a!~~b!~~c!~~d!~~n!}$ care reprezinta probabilitatea de a obtine un tabel de contingenta cu valorile $a, b, c, d, n=a+b+c+d$ din setul tuturor tabelelor posibile. Alternativa testului Fisher este testul $\chi^2$ (chi pătrat). Pentru detalii vezi \citep{fisher1922interpretation}.
+ \textbf{Testul Fisher} este un test exact în sensul ca poate calcula exact deviația de la ipoteza nula pentru ca ia în calcul toate posibilitățile de combinare a factorilor, care se folosește pentru tabelele de contingenta ale datelor categoriale în cazul în care numărul de categorii este mic (pentru multe categorii calculul este complicat pentru ca apar probleme numerice legate de lucru cu valori foarte mari generate de distribuția hipergeometrica și funcția $\Gamma$). Statistica folosita este $p = \frac{ \displaystyle{{a+b}\choose{a}} \displaystyle{{c+d}\choose{c}} }{ \displaystyle{{n}\choose{a+c}} } = \frac{(a+b)!~(c+d)!~(a+c)!~(b+d)!}{a!~~b!~~c!~~d!~~n!}$ care reprezinta probabilitatea de a obține un tabel de contingenta cu valorile $a, b, c, d, n=a+b+c+d$ din setul tuturor tabelelor posibile. Alternativa testului Fisher este testul $\chi^2$ (chi pătrat). Pentru detalii vezi \citep{fisher1922interpretation}.
 
 \subsubsection{Testul Kolmogorov–Smirnov}
  \label{testKS}
@@ -141,7 +141,7 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
  Testul t este robust la variațiile datelor de la normalitate dar se vor urmării câteva recomandări înainte de aplicarea lui:
  \begin{itemize}
   \item Sa se verifice folosind metoda grafica dacă datele urmăresc o distribuție de tip ``cocoașă``
-  \item Dacă dispersia $var(x)$ celor 2 eșantioane nu este egala (testabila folosind testul F, Levene, Bartlett sau cu un grafic Q-Q) trebuie aplicata corecția Welch care modifica statistica t în $t = {\overline{X}_1 - \overline{X}_2 \over s_{\overline{X}_1 - \overline{X}_2}}$ cu $s_{\overline{X}_1 - \overline{X}_2} = \sqrt{{s_1^2 \over n_1} + {s_2^2  \over n_2}}$
+  \item Dacă dispersia $var(x)$ celor 2 eșantioane nu este egala (testabilă folosind testul F, Levene, Bartlett sau cu un grafic Q-Q) trebuie aplicata corecția Welch care modifica statistica t în $t = {\overline{X}_1 - \overline{X}_2 \over s_{\overline{X}_1 - \overline{X}_2}}$ cu $s_{\overline{X}_1 - \overline{X}_2} = \sqrt{{s_1^2 \over n_1} + {s_2^2  \over n_2}}$
   \item Comparat cu testul Wilcoxon, testul t este potrivit pentru analiza datelor colectate folosind scale Likert deoarece are rezultate comparabile cu acesta în cazurile uzuale și chiar superioare dacă premizele testului Wilcoxon nu sunt îndeplinite: distribuția este multi-modala sau puternic deplasata spre extreme. Vezi \citep{clason1994analyzing,deWinter12}.
  \end{itemize}
  Pentru detalii vezi \citep{welch1947generalisation}.
@@ -236,7 +236,7 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
   \end{figure}
   %
   
-  Studiul a înregistrat și  date referitor la co-morbiditatea pacienților colectând date despre prezenta următoarelor condiții medicale: bronșita cronica, diabet, sindrom Parkinson, mieilita, spina bifida, depresie, fractura vertebrala, fractura de coloana sau \ac{AVC}. 24 de pacienți nu au raportat nici o condiție. Sumarul datelor este prezentat în tabelul \ref{tab:comoSumary}. 
+  Studiul a înregistrat și  date referitor la co-morbiditatea pacienților colectând date despre prezenta următoarelor condiții medicale: bronșita cronica, diabet, sindrom Parkinson, mielita, spina bifida, depresie, fractura vertebrala, fractura de coloana sau \ac{AVC}. 24 de pacienți nu au raportat nici o condiție. Sumarul datelor este prezentat în tabelul \ref{tab:comoSumary}. 
   %
   \begin{table}[H]
     \centering
@@ -302,8 +302,9 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
   \end{figure}
   %
   
-  Datele obiective (numărul de episoade de incontinenta pe 2 zile și \ac{FEFMP}) arata o îmbunatățire în urma tratamentului conform tabelului~\ref{tab:resTestSummary}. Pentru a evalua efectul tratamentului asupra \ac{FEFMP} am folosit modele lineare cu efecte fixe si testul ANOVA. Modelul selectat ca fiind cel mai bun folosind ANOVA este $y_{it} = X_{it}\mathbf{\beta}+\alpha_{i}+u_{it}$ unde $y_{it}$ este valoarea FEFMP pentru individul $i$ la momentul $t \in [PRE,POST]$ iar $X_{it}$ este vectorul de regresie $\left(\!\begin{array}{c}Trt\\group\end{array}\right)$. Dupa cum se vede din tabela~\ref{tab:resFEFMPlm}, tratamentul este foarte semnificativ iar un grad mare de semnificatie il are si cauza incontinentei urinare, grupul care sufera de \ac{IUI} avand un raspuns mai prost la tratament fata de cei ce sufera de \ac{IUE} dar fata de efectul tratamentului, influenta cauzei este de 5 ori mai slabă.
-  Pentru I2D, am inclus in modelul linear si un termen legat de numarul de nasteri dar rezultatele nu indica semificatie statistica nici pentru cauza sindromului si nici pentru numarul de nasteri. Mai precis, numarul de nasteri este corelat slab ($p=0.17$ insuficient pentru pragul de  relevanta statistica ales de $p<0.05$) cu datele conform tabelului~ \ref{tab:resI2Dlm}.
+  Datele obiective (numărul de episoade de incontinenta pe 2 zile și \ac{FEFMP}) arata o îmbunatățire în urma tratamentului conform tabelului~\ref{tab:resTestSummary}. Pentru a evalua efectul tratamentului asupra \ac{FEFMP} am folosit modele lineare cu efecte fixe și testul ANOVA. Modelul selectat ca fiind cel mai bun folosind ANOVA este $y_{it} = X_{it}\mathbf{\beta}+\alpha_{i}+u_{it}$ unde $y_{it}$ este valoarea FEFMP pentru individul $i$ la momentul $t \in [PRE,POST]$ iar $X_{it}$ este vectorul de regresie $\left(\!\begin{array}{c}Trt\\group\end{array}\right)$. După cum se vede din tabela~\ref{tab:resFEFMPlm}, tratamentul este foarte semnificativ iar un grad mare de semnificație îl are și cauza incontinentei urinare, grupul care suferă de \ac{IUI} având un răspuns mai prost la tratament fata de cei ce suferă de \ac{IUE} dar fata de efectul tratamentului, influenta cauzei este de 5 ori mai slabă.
+  Pentru I2D, am inclus în modelul linear și un termen legat de numărul de nașteri dar rezultatele nu indica semnificație statistica nici pentru cauza incontinentei și nici pentru numărul de nașteri. Mai precis, numărul de nașteri este corelat slab ($p=0.17$ insuficient pentru pragul de  relevanta statistica ales de $p<0.05$) cu datele conform tabelului~ \ref{tab:resI2Dlm}.
+  %
   \begin{table}[H]
 		\centering
 		\begin{tabular}{rrrrr}
@@ -330,17 +331,10 @@ stocare. \ac{IU} poate fi caracterizată în plus prin datele obținute în urma
 		\caption{Rezultatele modelului linear pentru I2D} 
 		\label{tab:resI2Dlm}
 	\end{table}
-  Impresiile pacienților despre efectele tratamentului, colectate la sfârșitul studiului clinic coincid cu rezultatele noastre, mai mult de 70\% ($n=39$) raportând ca se simt mai bine sau mult mai bine fata de situația anterioara.
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{incoResIGPI}
-    \caption{\acf{IGPI} la sfârșitul tratamentului}
-    \label{fig:incoResIGPI}
-  \end{figure}
   %
 \subsubsection{Analiza influentei tipului de incontinenta}
- Dupa cum a fost mentionat in sectiunea~\nameref{rezPop}, la studiu au participat un numar egal ($n_1=n_2=25$) de pacienti care sufera de \ac{IUE} si de \ac{IUI}. Intre aceste 2 grupuri exista diferente atat in parametrii populatiei (varsta, sex, etc.) precum si in rezultatele dupa aplicarea tratamentului. Grupul pacientilor care sufera de \ac{IUE} este compus exclusiv de paciente de sex feminin cu varste cuprinse intre 28 si 77 de ani, iar grupul care sufera de \ac{IUI} este compus preponderent din barbati (76\%, n=19) cu varste cuprinse intre 30 si 83 ani iar femeile (24\%, n=6) au varstele intre 27 si 77 ani. Dupa cum am aratat anterior (vezi figura~\ref{fig:incoComoCntBySex}), barbatii au de asemenea cel mai mare numar de probleme medicale.
-Efectele tratamentului inregistrate prin chestionare sunt influentate de tipul de incontinenta care se dovedeste a avea un efect semnificativ statistic ($p<0.05$) doar in 2 cazuri: \ac{CVDSU} si \ac{VAS} inainte de tratament si un efect nesemnificativ in \ac{FEFMP} dupa tratament. Valorile $p$ pentru corelarea dintre toate datele colectate pe scale Likert si grup, inainte si dupa tratament se gasesc in tabela~\ref{tab:resFisherGroup}. In urma unei regresii lineare
+ După cum a fost menționat în secțiunea~\nameref{rezPop}, la studiu au participat un număr egal ($n_1=n_2=25$) de pacienți care suferă de \ac{IUE} și de \ac{IUI}. Intre aceste 2 grupuri exista diferențe atât în parametrii populației (vârsta, sex, co-morbiditate, etc.) precum și în rezultatele după aplicarea tratamentului. Grupul pacienților care suferă de \ac{IUE} este compus exclusiv de paciente de sex feminin cu vârste cuprinse intre 28 și 77 de ani, iar grupul care suferă de \ac{IUI} este compus preponderent din bărbați (76\%, n=19) cu vârste cuprinse intre 30 și 83 ani iar femeile (24\%, n=6) au vârstele intre 27 și 77 ani. După cum am arătat anterior (vezi figura~\ref{fig:incoComoCntBySex}), bărbații au de asemenea cel mai mare număr de probleme medicale.
+Efectele tratamentului înregistrate prin chestionare sunt influențate de tipul de incontinenta care se dovedește a avea un efect semnificativ statistic ($p<0.05$) doar în 2 cazuri: \ac{CVDSU} și \ac{VAS} înainte de tratament și un efect nesemnificativ în \ac{FEFMP} după tratament. Valorile $p$ pentru corelarea dintre toate datele colectate pe scale Likert și grup, înainte și după tratament se găsesc în tabela~\ref{tab:resFisherGroup}. 
  %
  \begin{table}[H]
 	\centering
@@ -353,13 +347,41 @@ Efectele tratamentului inregistrate prin chestionare sunt influentate de tipul d
 		USS 															& 0.28003 													& 0.30178 \\ \hline
 		\textcolor{yellow}{FEFMP} 	& 0.15156 													& \textcolor{yellow}{0.08047} \\ \hline
 	\end{tabular}
-	\caption{Rezultatele testelor Fisher pentru asocierea dintre valoarea inregistrata si grup} 
+	\caption{Rezultatele testelor Fisher pentru asocierea dintre valoarea înregistrata și grup} 
 	\label{tab:resFisherGroup}
 \end{table}
+%
+Pentru a aprecia magnitudinea efectelor tratamentului în funcție de apartenență la grup am construit un model linear pentru valorile \ac{CVDSU}, \ac{VAS} și \ac{FEFMP}. Figura~\ref{fig:incoResRegGrp} arata o îmbunatățire mai puternica în privința acestor 2 valori raportate pentru grupa pacienților care suferă de \ac{IUI} ($\beta=-4.68, t(48)=0.6258, p\ll0.01$) fata de grupa pacienților care suferă de \ac{IUE} ($\beta=-3.92, t(48)=1.136, p\ll0.01$) (pantele liniilor de regresie sunt mai mari în valori absolute pentru \ac{IUI}, iar semnul negativ indica o scădere a valorilor după aplicarea tratamentului). Aceeași analiza a fost repetata pentru \ac{FEFMP} (vezi figura~\ref{fig:incoResRegFEFMP}) care indica o îmbunatățire mai mare pentru pacienții care suferă de \ac{IUE} ($\beta=2.20, t(48)=0.831, p\ll0.01$)fata de cei care suferă de \ac{IUI} ($\beta=2.00, t(48)=0.950, p\ll0.01$) însa aceasta observație nu este semnificativa din punct de vedere statistic ($p=0.08047>0.05$).
+  %
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{incoResRegGrp}
+    \caption{Evolutia \acf{CVDSU} și \acf{VAS} pentru cele 2 grupe}
+    \label{fig:incoResRegGrp}
+  \end{figure}
+  %
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{incoResRegFEFMP}
+    \caption{Evoluția \acf{FEFMP}}
+    \label{fig:incoResRegFEFMP}
+  \end{figure}
+  %
 
  %%%% 
 \Section{Concluzii}
-  
+ Tratamentul aplicat acestor pacienți îmbunătățește semnificativ toate valorile măsurate, atât cele subiective cât și cele obiective, reduce cu 87\% ($\approx2\sigma$) numărul de episoade de incontinenta măsurate pe parcursul a 2 zile și mărește cu 50\% ($\approx2\sigma$) forța musculaturii perineale măsurata conform \acf{FEFMP}. Aceste efecte sunt robuste indiferent dacă pacienții suferă de \acf{IUE} sau \acf{IUI}. Intre aceste 2 grupuri de pacienți sunt diferențe semnificative de sex, vârsta, co-morbidități și în cazul unor evaluări subiective (\acf{CVDSU} și \acf{VAS}). Efectele tratamentului diferă semnificativ statistic intre aceste 2 grupuri doar în cazul datelor pentru \ac{CEII}, \ac{CVDSU} unde indica o îmbunatățire mai pronunțata pentru pacienții care suferă de \ac{IUI} și pentru \ac{FEFMP} unde indica o îmbunatățire mai pronunțata pentru cei ce suferă de \ac{IUE}. Nu trebuie pierdut din vedere ca aceste corelații (mai ales pentru evaluările subiective unde pot exista influente culturale profunde) se pot datora unor parametrii care nu au fost măsurați în acest studiu chiar dacă au ieșit în evidenta la compararea celor 2 grupuri de pacienți -- grupurile sunt suficient de ne-omogene pentru a intuii ca pot exista alți factori care sa influențeze valorile măsurate în afara faptului ca un pacient suferă de \ac{IUI} și nu de \ac{IUE}.  
+ 
+ Impresiile pacienților despre efectele tratamentului, colectate la sfârșitul studiului clinic coincid cu rezultatele noastre, mai mult de 70\% ($n=39$) raportând ca se simt mai bine sau mult mai bine fata de situația anterioara.
+  %
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{incoResIGPI}
+    \caption{\acf{IGPI} la sfârșitul tratamentului}
+    \label{fig:incoResIGPI}
+  \end{figure}
+  %
+ 
    
   \closeopenmulticols
   

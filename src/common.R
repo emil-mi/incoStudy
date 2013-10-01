@@ -17,12 +17,13 @@ suppressPackageStartupMessages({
   #library(gsDesign)
   #library(MCMCpack)
   #library(nlme)
-  #library(HH)
+  library(HH)
   #library(lme4)
   #library(languageR)
   #library(pbkrtest)
   #library(plm)
   #library(Hmisc)
+  library(nortest)
 })
 
 graph.bg<-"white"

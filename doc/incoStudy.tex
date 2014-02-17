@@ -1,15 +1,23 @@
 \RequirePackage{lineno}
 \documentclass[12pt]{article}
+\usepackage[QX,T1]{fontenc}
 \usepackage[final]{graphicx}
-\usepackage{ucs,multicol,natbib,ifdraft,mathtools,xfrac,float,array}
+\usepackage[utf8]{inputenc}
+\usepackage{ucs,multicol,natbib,ifdraft,mathtools,xfrac,float,array,newunicodechar,lmodern}
 \usepackage[hidelinks]{hyperref}
-\usepackage[utf8x]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage[romanian]{babel}
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage[printonlyused,withpage]{acronym}
 \usepackage[usenames]{color}
 \usepackage[obeyDraft,colorinlistoftodos]{todonotes}
+
+\addto\extrasromanian{\fontencoding{QX}\selectfont}
+\addto\noextrasromanian{\fontencoding{\encodingdefault}\selectfont}
+
+\newunicodechar{Ș}{\c S} % qxenc provides the precomposed combination
+\newunicodechar{ș}{\c s} % ditto
+\newunicodechar{Ț}{\c T} % ditto
+\newunicodechar{ț}{\c t} % ditto
 
 \floatstyle{boxed}
 \restylefloat{figure}
